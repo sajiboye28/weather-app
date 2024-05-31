@@ -1,0 +1,52 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #74ebd5, #ACB6E5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Roboto', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #333;
+}
+
+code {
+    font-family: 'Source Code Pro', Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    padding: 20px;
+    margin: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background: #ffffff;
+    font-family: 'Roboto', sans-serif;
+}
+
+.app-label {
+    color: #555;
+    margin: 20px auto;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.close-button {
+    padding: 5px 8px;
+    background-color: #333;
+    border-radius: 50%;
+    color: white;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
