@@ -3,11 +3,11 @@ import styled from "styled-components";
 import { WeatherIcons } from "../App";
 
 export const WeatherInfoIcons = {
-  sunset: "/weather-app/icons/temp.svg",
-  sunrise: "/weather-app/icons/temp.svg",
-  humidity: "/weather-app/icons/humidity.svg",
-  wind: "/weather-app/icons/wind.svg",
-  pressure: "/weather-app/icons/pressure.svg",
+  sunset: process.env.PUBLIC_URL + "/icons/temp.svg",
+  sunrise: process.env.PUBLIC_URL + "/icons/temp.svg",
+  humidity: process.env.PUBLIC_URL + "/icons/humidity.svg",
+  wind: process.env.PUBLIC_URL + "/icons/wind.svg",
+  pressure: process.env.PUBLIC_URL + "/icons/pressure.svg",
 };
 
 const Location = styled.span`
@@ -15,15 +15,22 @@ const Location = styled.span`
   text-transform: capitalize;
   font-size: 28px;
   font-weight: bold;
+  color: #333;
 `;
+
 const Condition = styled.span`
   margin: 20px auto;
   text-transform: capitalize;
   font-size: 14px;
+  color: #555;
+
   & span {
     font-size: 28px;
+    font-weight: bold;
+    color: #000;
   }
 `;
+
 const WeatherInfoLabel = styled.span`
   margin: 20px 25px 10px;
   text-transform: capitalize;
@@ -31,12 +38,15 @@ const WeatherInfoLabel = styled.span`
   width: 90%;
   font-weight: bold;
   font-size: 14px;
+  color: #333;
 `;
+
 const WeatherIcon = styled.img`
   width: 100px;
   height: 100px;
   margin: 5px auto;
 `;
+
 const WeatherContainer = styled.div`
   display: flex;
   width: 100%;
@@ -54,6 +64,7 @@ const WeatherInfoContainer = styled.div`
   align-items: center;
   flex-wrap: wrap;
 `;
+
 const InfoContainer = styled.div`
   display: flex;
   margin: 5px 10px;
@@ -61,18 +72,23 @@ const InfoContainer = styled.div`
   justify-content: space-evenly;
   align-items: center;
 `;
+
 const InfoIcon = styled.img`
   width: 36px;
   height: 36px;
 `;
+
 const InfoLabel = styled.span`
   display: flex;
   flex-direction: column;
   font-size: 14px;
   margin: 15px;
+  color: #333;
+
   & span {
     font-size: 12px;
     text-transform: capitalize;
+    color: #777;
   }
 `;
 
@@ -91,10 +107,11 @@ const WeatherInfoComponent = (props) => {
 
 const WeatherComponent = (props) => {
   const { weather } = props;
-  const isDay = weather?.weather[0].icon?.includes('d');
+  const isDay = weather?.weather[0].icon?.includes("d");
   const getTime = (timeStamp) => {
     return `${new Date(timeStamp * 1000).getHours()} : ${new Date(timeStamp * 1000).getMinutes()}`;
   };
+
   return (
     <>
       <WeatherContainer>
@@ -106,15 +123,15 @@ const WeatherComponent = (props) => {
       </WeatherContainer>
       <Location>{`${weather?.name}, ${weather?.sys?.country}`}</Location>
 
-      <WeatherInfoLabel>More Information</WeatherInfoLabel>
+      <WeatherInfoLabel>Weather Info</WeatherInfoLabel>
       <WeatherInfoContainer>
         <WeatherInfoComponent
           name={isDay ? "sunset" : "sunrise"}
           value={`${getTime(weather?.sys[isDay ? "sunset" : "sunrise"])}`}
         />
-        <WeatherInfoComponent name="humidity" value={weather?.main?.humidity} />
-        <WeatherInfoComponent name="wind" value={weather?.wind?.speed} />
-        <WeatherInfoComponent name="pressure" value={weather?.main?.pressure} />
+        <WeatherInfoComponent name={"humidity"} value={weather?.main?.humidity} />
+        <WeatherInfoComponent name={"wind"} value={weather?.wind?.speed} />
+        <WeatherInfoComponent name={"pressure"} value={weather?.main?.pressure} />
       </WeatherInfoContainer>
     </>
   );
