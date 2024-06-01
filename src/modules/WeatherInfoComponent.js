@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { WeatherIcons } from "../App";
+import anime from 'animejs';
 
 export const WeatherInfoIcons = {
   sunset: process.env.PUBLIC_URL + "/icons/temp.svg",
@@ -112,9 +113,19 @@ const WeatherComponent = (props) => {
     return `${new Date(timeStamp * 1000).getHours()} : ${new Date(timeStamp * 1000).getMinutes()}`;
   };
 
+  useEffect(() => {
+    anime({
+      targets: '.weather-container',
+      opacity: [0, 1],
+      translateY: [-50, 0],
+      duration: 1000,
+      easing: 'easeOutExpo'
+    });
+  }, [weather]);
+
   return (
     <>
-      <WeatherContainer>
+      <WeatherContainer className="weather-container">
         <Condition>
           <span>{`${Math.floor(weather?.main?.temp - 273)}°C`}</span>
           {`  |  ${weather?.weather[0].description}`}

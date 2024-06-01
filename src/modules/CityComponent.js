@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import React from "react";
+import React, { useEffect } from "react";
+import anime from 'animejs';
 
 const SearchBox = styled.form`
   display: flex;
@@ -58,11 +59,22 @@ const WelcomeWeatherLogo = styled.img`
 
 const CityComponent = (props) => {
   const { updateCity, fetchWeather } = props;
+
+  useEffect(() => {
+    anime({
+      targets: '.search-box',
+      opacity: [0, 1],
+      translateY: [-50, 0],
+      duration: 1000,
+      easing: 'easeOutExpo'
+    });
+  }, []);
+
   return (
     <>
       <WelcomeWeatherLogo src={process.env.PUBLIC_URL + "/icons/perfect-day.svg"} />
       <ChooseCityLabel>Find Weather of Your City</ChooseCityLabel>
-      <SearchBox onSubmit={fetchWeather}>
+      <SearchBox className="search-box" onSubmit={fetchWeather}>
         <input
           onChange={(e) => updateCity(e.target.value)}
           placeholder="Enter city name"
